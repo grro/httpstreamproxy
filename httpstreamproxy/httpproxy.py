@@ -29,16 +29,6 @@ class Connection:
         return self.creation_date == other.creation_date
 
 
-class ConnectionListener():
-
-    def on_connected(self, connection: Connection):
-        pass
-
-    def on_disconnected(self, connection: Connection):
-        pass
-
-
-
 class RequestHandler(BaseHTTPRequestHandler):
 
     def __init__(self, request, client_address, server):
