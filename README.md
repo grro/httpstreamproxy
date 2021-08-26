@@ -1,7 +1,5 @@
 # http streaming proxy
-A http streaming proxy
-
-This project implements HTTP streaming proxy 
+This project implements HTTP streaming proxy that can be used to proxy webcam streams.
 
 To run this software you may use Docker or [PIP](https://realpython.com/what-is-pip/) package manager such as shown below
 
@@ -12,7 +10,7 @@ docker run -p 8080:8080 -e target_url="https://192.168.1.70/anonymous/jpeg/strea
 
 **PIP approach**
 ```
-sudo pip install internet_monitor_webthing
+sudo pip install httpstreamproxy
 ```
 
 After this installation you may start the proxy inside your python code or via command line using
