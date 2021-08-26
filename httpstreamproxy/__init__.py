@@ -45,7 +45,7 @@ class InternetApp(App):
             bool_verify = True if args.verify == 'True' else False
             run_server(port, target_url=args.target_url, verify=bool_verify)
             return True
-        elif args.command == 'register' and (args.proxy_port > 0):
+        elif args.command == 'register':
             print("register " + self.packagename + " on port " + str(args.port))
             unit = UNIT_TEMPLATE.substitute(packagename=self.packagename, entrypoint=self.entrypoint, port=port, verify=args.verify, target_url=args.target_url, verbose=verbose)
             self.unit.register(port, unit)
