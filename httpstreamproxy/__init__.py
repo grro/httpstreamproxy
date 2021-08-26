@@ -17,7 +17,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=$entrypoint --command listen --port $port ---target_uri $target_url --verify $verify 
+ExecStart=$entrypoint --command listen --port $port --target_uri $target_url --verify $verify 
 SyslogIdentifier=$packagename
 StandardOutput=syslog
 StandardError=syslog
