@@ -4,7 +4,7 @@ from string import Template
 
 
 PACKAGENAME = 'httpstreamproxy'
-ENTRY_POINT = "htttpproxy"
+ENTRY_POINT = "httpproxy"
 DESCRIPTION = "A http stream proxy"
 
 
