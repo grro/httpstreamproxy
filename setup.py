@@ -2,7 +2,7 @@ from setuptools import setup
 from os import path
 
 PACKAGENAME = 'httpstreamproxy'
-ENTRY_POINT = "htttpproxy"
+ENTRY_POINT = "httpproxy"
 DESCRIPTION = "A http stream proxy"
 
 
