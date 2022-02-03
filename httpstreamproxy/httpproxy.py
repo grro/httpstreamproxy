@@ -103,7 +103,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.server.on_disconnected(connection)
 
 
-def run_server(port: int, target_url: str, verify: bool = True, max_lifetime_sec: int = 60):
+def run_server(port: int, target_url: str, verify: bool = True, max_lifetime_sec: int = 45 * 60):
     server = ThreadingServer(('0.0.0.0', port), target_url, max_lifetime_sec, verify)
     print(f"Starting httpd server on {port}")
     server.serve_forever()
