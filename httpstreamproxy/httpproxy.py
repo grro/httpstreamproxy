@@ -83,6 +83,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         print("Connection " + str(self.client_address[0]) + ":" + str(self.client_address[1]) + " established")
         connection = Connection(self)
         self.server.on_connected(connection)
+        resp = None
         try:
             resp = requests.get(self.server.target_url, stream=True, verify=self.server.verify)
             self.send_response(200)
@@ -96,6 +97,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         except Exception as e:
             print(e)
         finally:
+            if resp is not None:
+                try:
+                    resp.close()
+                except Exception as e:
+                    print(e)
             try:
                 self.wfile.close()
             except Exception as e:
