@@ -56,8 +56,8 @@ class ThreadingServer(ThreadingMixIn, HTTPServer):
         print("Connection "  + str(connection) + " terminated (running connections " + str(len(self.running_connections)) + ")")
 
     def __run_housekeeping(self):
-        sleep(self.max_lifetime_sec / 2)
         while True:
+            sleep(self.max_lifetime_sec / 2)
             try:
                 connections = set(self.running_connections)
                 if len(connections) > 0:
