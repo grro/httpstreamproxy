@@ -35,7 +35,7 @@ setup(
         'http', 'proxy', 'stream', 'server'
     ],
     install_requires=[
-        'requests==2.26.0'
+        'requests'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
