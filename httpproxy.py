@@ -48,14 +48,14 @@ class ThreadingServer(ThreadingMixIn, HTTPServer):
 
     def on_connected(self, connection: Connection):
         self.running_connections.append(connection)
-        print("Connection "  + str(connection) + " established (running connections " + str(len(self.running_connections)) + ")")
+        logging.info("Connection "  + str(connection) + " established (running connections " + str(len(self.running_connections)) + ")")
 
     def on_disconnected(self, connection: Connection):
         try:
             self.running_connections.remove(connection)
         except Exception as e:
             print(e)
-        print("Connection "  + str(connection) + " terminated (running connections " + str(len(self.running_connections)) + ")")
+        logging.info("Connection "  + str(connection) + " terminated (running connections " + str(len(self.running_connections)) + ")")
 
     def __run_housekeeping(self):
         while True:
@@ -68,7 +68,7 @@ class ThreadingServer(ThreadingMixIn, HTTPServer):
                             connection.close()
 
             except Exception as e:
-                print("error occurred while housekeeping " + str(e))
+                logging.error("error occurred while housekeeping " + str(e))
 
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -82,7 +82,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.is_running = False
 
     def do_GET(self):
-        print("Connection " + str(self.client_address[0]) + ":" + str(self.client_address[1]) + " established")
+        logging.info("Connection " + str(self.client_address[0]) + ":" + str(self.client_address[1]) + " established")
         connection = Connection(self)
         self.server.on_connected(connection)
         resp = None
@@ -113,7 +113,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 def run_server(port: int, target_url: str, verify: bool = True, max_lifetime_sec: int = 45 * 60):
     server = ThreadingServer(('0.0.0.0', port), target_url, max_lifetime_sec, verify)
-    print(f"Starting httpd server on {port}")
+    logging.info("Starting httpd server on " + str(port) + " target url=" + target_url)
     server.serve_forever()
 
 
