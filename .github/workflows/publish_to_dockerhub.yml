@@ -11,26 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.10]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install setuptools wheel twine
-      - name: Build distribution
-        run: |
-          python setup.py sdist bdist_wheel
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: grro/httpstreamproxy # list of Docker images to use as base name for tags
+          images: grro/httpproxy  # list of Docker images to use as base name for tags
           tag-sha: true # add git short SHA as Docker tag
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -46,6 +34,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+          platforms: linux/amd64, linux/arm64/v8
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}

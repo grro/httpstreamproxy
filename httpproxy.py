@@ -1,3 +1,5 @@
+import sys
+import logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from datetime import datetime
 from time import sleep
@@ -113,6 +115,15 @@ def run_server(port: int, target_url: str, verify: bool = True, max_lifetime_sec
     server = ThreadingServer(('0.0.0.0', port), target_url, max_lifetime_sec, verify)
     print(f"Starting httpd server on {port}")
     server.serve_forever()
+
+
+
+if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s %(name)-20s: %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    logging.getLogger('tornado.access').setLevel(logging.ERROR)
+    logging.getLogger('urllib3.connectionpool').setLevel(logging.WARNING)
+    run_server(int(sys.argv[1]), sys.argv[2], bool(sys.argv[2]))
+
 
 
 #run_server(9070, 'https://10.1.66.20/anonymous/jpeg/stream=0', False, max_lifetime_sec=10)
